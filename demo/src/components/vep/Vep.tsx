@@ -62,8 +62,7 @@ export const Vep: React.FC = () => {
         {ffmpegReady ? (
           <Col>
             <Uploader file={file} setSource={setSource} setFile={setFile} />
-            <Player source={source} file={file} />
-            {file && <ConvertFile ffmpeg={ffmpegRef.current} file={file} />}
+            <Player ffmpeg={ffmpegRef.current} source={source} file={file} />
           </Col>
         ) : (
           "Loading Vep..."

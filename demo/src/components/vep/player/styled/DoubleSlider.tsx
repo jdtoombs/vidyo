@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { Col, Row } from "../../layout";
+import { Col } from "../../layout";
 
 export const DoubleSlider = styled(Col)`
   width: 100%;
   margin-top: 0.5em;
+  margin-bottom: 1em;
   /* style slider */
   input[type="range"] {
     -webkit-appearance: none;

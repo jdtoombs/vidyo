@@ -1,6 +1,7 @@
 import React from "react";
 import { ControlBar } from ".";
-import { Col } from "..";
+import { Col, Row } from "..";
+import { FFmpeg } from "@ffmpeg/ffmpeg";
 
 export interface IPlayerProps {
   width?: number;
@@ -8,6 +9,7 @@ export interface IPlayerProps {
   file: File | null;
   /** use default html5 controls */
   defaultControls?: boolean;
+  ffmpeg: FFmpeg;
 }
 
 /** component containing the video player
@@ -18,13 +20,14 @@ export interface IPlayerProps {
 export const Player: React.FC<IPlayerProps> = ({
   source,
   width = 1024,
+  file,
   defaultControls = false,
+  ffmpeg,
 }) => {
   const videoRef = React.useRef<HTMLVideoElement>(null);
+
   return (
-    <>
-      <Col>
-      </Col>
+    <Row>
       <Col>
         <video
           ref={videoRef}
@@ -32,8 +35,8 @@ export const Player: React.FC<IPlayerProps> = ({
           src={source ?? ""}
           controls={defaultControls}
         />
-        <ControlBar video={videoRef} />
+        <ControlBar ffmpeg={ffmpeg} file={file} video={videoRef} />
       </Col>
-    </>
+    </Row>
   );
 };

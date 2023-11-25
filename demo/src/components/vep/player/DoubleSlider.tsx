@@ -4,16 +4,25 @@ import { Row } from "..";
 
 export interface IDoubleSliderProps {
   video: React.RefObject<HTMLVideoElement>;
+  startTime: number;
+  endTime: number;
+  setStartTime: React.Dispatch<React.SetStateAction<number>>;
+  setEndTime: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const DoubleSlider: React.FC<IDoubleSliderProps> = ({ video }) => {
-  const [startTime, setStartTime] = React.useState(0);
-  const [endTime, setEndTime] = React.useState(0);
+export const DoubleSlider: React.FC<IDoubleSliderProps> = ({
+  video,
+  startTime,
+  setStartTime,
+  endTime,
+  setEndTime,
+}) => {
   const [tracker, setTracker] = React.useState(0);
   const [duration, setDuration] = React.useState(0);
 
   // TODO: change from any to something more specific
   // TODO: do some jank to combine to input sliders to look like one
+  // TODO: reset tracker to start point when end point reached, also change  slider two and one so they can be dragged to whichever end
 
   video.current?.addEventListener("timeupdate", () => {
     video.current?.currentTime && setTracker(video.current.currentTime);
@@ -23,7 +32,7 @@ export const DoubleSlider: React.FC<IDoubleSliderProps> = ({ video }) => {
     video.current.onloadedmetadata = () => {
       setDuration(Number(video.current?.duration));
     };
-  
+
   return (
     <styled.DoubleSlider>
       <Row className="slider-parent">

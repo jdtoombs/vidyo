@@ -8,6 +8,19 @@ export const ControlBar = styled(Row)`
   background-color: ${(props) => props.theme.css.black};
   box-sizing: border-box;
 
+  .tools {
+    svg {
+      margin-left: 0.5em;
+    }
+  }
+
+  svg {
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+    }
+  }
+
   .column-container {
     width: 100%;
   }

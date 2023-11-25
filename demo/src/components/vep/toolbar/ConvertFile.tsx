@@ -1,7 +1,8 @@
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile } from "@ffmpeg/util";
 import React from "react";
-import { Button } from "../inputs";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMusic } from "@fortawesome/free-solid-svg-icons";
 
 export interface IConvertFileProps {
   ffmpeg: FFmpeg;
@@ -22,8 +23,6 @@ export const ConvertFile: React.FC<IConvertFileProps> = ({ ffmpeg, file }) => {
     download.remove();
   };
   return (
-    <Button variant="action" onClick={() => toMp3()}>
-      Convert to mp3
-    </Button>
+    <FontAwesomeIcon icon={faMusic} onClick={() => toMp3()} />
   );
 };

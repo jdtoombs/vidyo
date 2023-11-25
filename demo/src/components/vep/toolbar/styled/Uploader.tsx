@@ -3,7 +3,7 @@ import { Row } from "../../layout";
 
 export const Uploader = styled(Row)`
   width: 100%;
-  margin-bottom: 0.25em;
+  /* margin-bottom: 0.25em; */
   border: 0.05em solid;
   border-color: ${(props) => props.theme.css.black};
   background-color: ${(props) => props.theme.css.black};
