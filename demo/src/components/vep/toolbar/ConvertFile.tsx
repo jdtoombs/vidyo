@@ -1,6 +1,7 @@
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile } from "@ffmpeg/util";
 import React from "react";
+import { Button } from "../buttons";
 
 export interface IConvertFileProps {
   ffmpeg: FFmpeg;
@@ -20,9 +21,5 @@ export const ConvertFile: React.FC<IConvertFileProps> = ({ ffmpeg, file }) => {
     download.click();
     download.remove();
   };
-  return (
-    <>
-      <button onClick={() => toMp3()}>Convert to mp3</button>
-    </>
-  );
+  return <Button variant="action" onClick={() => toMp3()}>Convert to mp3</Button>;
 };

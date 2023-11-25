@@ -1,1 +1,2 @@
-export * from './ControlBar';
+export * from "./ControlBar";
+export * from "./PlayPause";

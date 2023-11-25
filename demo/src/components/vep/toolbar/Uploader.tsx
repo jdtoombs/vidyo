@@ -1,16 +1,25 @@
 import React from "react";
 import * as styled from "./styled";
+import { Button } from "../buttons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { Row } from "..";
 
 export interface IUploaderProps {
   setFile: React.Dispatch<React.SetStateAction<File | null>>;
   setSource: React.Dispatch<React.SetStateAction<string | null>>;
+  file: File | null;
 }
 /**
  * component to upload a file.
  * @param setFile will set the parent state to the file that is uploaded
  * @returns file input as well as a clear button to clear the file input
  */
-export const Uploader: React.FC<IUploaderProps> = ({ setFile, setSource }) => {
+export const Uploader: React.FC<IUploaderProps> = ({
+  setFile,
+  setSource,
+  file,
+}) => {
   const ref = React.useRef<HTMLInputElement>(null);
   /** change event for when file is uploaded */
   const handleUploadChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,10 +37,22 @@ export const Uploader: React.FC<IUploaderProps> = ({ setFile, setSource }) => {
 
   return (
     <styled.Uploader className="uploader">
-      <input type="file" ref={ref} onChange={handleUploadChange} />
-      <button className="clear-button" onClick={handleClear}>
+      <label htmlFor="file-upload">
+        <Row className="upload-row">
+          <FontAwesomeIcon className="upload-button" icon={faCloudArrowUp} />
+        </Row>
+      </label>
+      <div className="file-name">{file ? file.name : "No file selected"}</div>
+      <input
+        id="file-upload"
+        type="file"
+        hidden
+        ref={ref}
+        onChange={handleUploadChange}
+      />
+      <Button variant="danger" className="clear-button" onClick={handleClear}>
         x
-      </button>
+      </Button>
     </styled.Uploader>
   );
 };

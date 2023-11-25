@@ -1,4 +1,5 @@
 import React from "react";
+import { ControlBar } from ".";
 
 export interface IPlayerProps {
   width?: number;
@@ -18,9 +19,16 @@ export const Player: React.FC<IPlayerProps> = ({
   width = 1024,
   defaultControls = false,
 }) => {
+  const videoRef = React.useRef<HTMLVideoElement>(null);
   return (
     <>
-      <video width={width} src={source ?? ""} controls={defaultControls} />
+      <video
+        ref={videoRef}
+        width={width}
+        src={source ?? ""}
+        controls={defaultControls}
+      />
+      <ControlBar video={videoRef} />
     </>
   );
 };
