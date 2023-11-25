@@ -2,6 +2,7 @@ import React from "react";
 import { Col, ConvertFile, Player, Uploader } from ".";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { toBlobURL } from "@ffmpeg/util";
+import * as styled from "./styled";
 
 /**
  * component to upload, edit, and play a file.
@@ -16,9 +17,6 @@ export const Vep: React.FC = () => {
   const load = async () => {
     const baseUrl = "https://unpkg.com/@ffmpeg/core@0.12.4/dist/esm";
     const ffmpeg = ffmpegRef.current;
-    ffmpeg.on("log", ({ message }) => {
-      console.log(message);
-    });
     await ffmpeg
       .load({
         coreURL: await toBlobURL(
@@ -57,16 +55,16 @@ export const Vep: React.FC = () => {
   }, [file]);
 
   return (
-    <>
+    <styled.Vep className="vep-container">
       {ffmpegReady ? (
         <Col>
-          <Uploader setFile={setFile} />
+          <Uploader setSource={setSource} setFile={setFile} />
           <Player source={source} file={file} />
           {file && <ConvertFile ffmpeg={ffmpegRef.current} file={file} />}
         </Col>
       ) : (
         "Loading Vep..."
       )}
-    </>
+    </styled.Vep>
   );
 };

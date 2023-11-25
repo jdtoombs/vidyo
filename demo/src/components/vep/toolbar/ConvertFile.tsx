@@ -6,6 +6,8 @@ export interface IConvertFileProps {
   ffmpeg: FFmpeg;
   file: File;
 }
+
+/** TODO: will be any type of file not just MP3  */
 export const ConvertFile: React.FC<IConvertFileProps> = ({ ffmpeg, file }) => {
   const toMp3 = async () => {
     ffmpeg.writeFile(file.name, await fetchFile(file));

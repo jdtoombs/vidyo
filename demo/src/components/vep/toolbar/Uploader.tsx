@@ -1,15 +1,16 @@
 import React from "react";
-import { Row } from ".";
+import * as styled from "./styled";
 
 export interface IUploaderProps {
   setFile: React.Dispatch<React.SetStateAction<File | null>>;
+  setSource: React.Dispatch<React.SetStateAction<string | null>>;
 }
 /**
  * component to upload a file.
  * @param setFile will set the parent state to the file that is uploaded
  * @returns file input as well as a clear button to clear the file input
  */
-export const Uploader: React.FC<IUploaderProps> = ({ setFile }) => {
+export const Uploader: React.FC<IUploaderProps> = ({ setFile, setSource }) => {
   const ref = React.useRef<HTMLInputElement>(null);
   /** change event for when file is uploaded */
   const handleUploadChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,14 +22,16 @@ export const Uploader: React.FC<IUploaderProps> = ({ setFile }) => {
   /** clear currently uplaoded file */
   const handleClear = () => {
     setFile(null);
-    console.log(ref.current);
+    setSource(null);
     ref.current && ref.current.value && (ref.current.value = "");
   };
 
   return (
-    <Row>
+    <styled.Uploader className="uploader">
       <input type="file" ref={ref} onChange={handleUploadChange} />
-      <button onClick={handleClear}>x</button>
-    </Row>
+      <button className="clear-button" onClick={handleClear}>
+        x
+      </button>
+    </styled.Uploader>
   );
 };
