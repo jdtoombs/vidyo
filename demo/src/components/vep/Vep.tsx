@@ -4,7 +4,7 @@ import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { toBlobURL } from "@ffmpeg/util";
 import * as styled from "./styled";
 import { ThemeProvider } from "styled-components";
-import css from './css/_variables.module.scss'
+import css from "./css/_variables.module.scss";
 
 /**
  * component to upload, edit, and play a file.

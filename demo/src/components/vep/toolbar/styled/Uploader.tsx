@@ -15,7 +15,6 @@ export const Uploader = styled(Row)`
     margin-left: auto;
   }
 
-
   .file-name {
     margin-left: 0.5em;
     color: ${(props) => props.theme.css.white};

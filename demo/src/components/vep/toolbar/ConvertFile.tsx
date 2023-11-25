@@ -21,5 +21,9 @@ export const ConvertFile: React.FC<IConvertFileProps> = ({ ffmpeg, file }) => {
     download.click();
     download.remove();
   };
-  return <Button variant="action" onClick={() => toMp3()}>Convert to mp3</Button>;
+  return (
+    <Button variant="action" onClick={() => toMp3()}>
+      Convert to mp3
+    </Button>
+  );
 };

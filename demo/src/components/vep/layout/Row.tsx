@@ -8,6 +8,8 @@ export interface IRowProps
 /** flex items in row direction */
 export const Row: React.FC<IRowProps> = ({ children, ...rest }) => {
   return (
-    <div {...rest} style={{ flexDirection: "row", display: "flex" }}>{children}</div>
+    <div {...rest} style={{ flexDirection: "row", display: "flex" }}>
+      {children}
+    </div>
   );
 };
