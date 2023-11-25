@@ -1,7 +1,7 @@
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile } from "@ffmpeg/util";
 import React from "react";
-import { Button } from "../buttons";
+import { Button } from "../inputs";
 
 export interface IConvertFileProps {
   ffmpeg: FFmpeg;

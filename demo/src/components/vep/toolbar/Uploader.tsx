@@ -1,6 +1,6 @@
 import React from "react";
 import * as styled from "./styled";
-import { Button } from "../buttons";
+import { Button } from "../inputs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { Row } from "..";

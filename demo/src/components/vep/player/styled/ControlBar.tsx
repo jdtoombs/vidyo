@@ -7,4 +7,8 @@ export const ControlBar = styled(Row)`
   color: ${(props) => props.theme.css.action};
   background-color: ${(props) => props.theme.css.black};
   box-sizing: border-box;
+
+  .column-container {
+    width: 100%;
+  }
 `;
