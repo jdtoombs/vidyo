@@ -10,7 +10,7 @@ export interface IDoubleSliderProps {
   setEndTime: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const DoubleSlider: React.FC<IDoubleSliderProps> = ({
+export const VideoSeeker: React.FC<IDoubleSliderProps> = ({
   video,
   startTime,
   setStartTime,
@@ -34,33 +34,35 @@ export const DoubleSlider: React.FC<IDoubleSliderProps> = ({
     };
 
   return (
-    <styled.DoubleSlider>
-      <Row className="slider-parent">
-        <input
-          id="input"
-          value={startTime}
-          className="slider-one"
-          type="range"
-          min={0}
-          step={0.01}
-          max={duration / 2}
-          onChange={({ target: { value } }) => {
-            setStartTime(Number(value));
-          }}
-        />
-        <input
-          value={endTime}
-          id="input"
-          className="slider-two"
-          type="range"
-          min={duration / 2}
-          step={0.01}
-          max={duration}
-          onChange={({ target: { value } }) => {
-            setEndTime(Number(value));
-          }}
-        />
-      </Row>
+    <styled.VideoSeeker>
+      {/* SET START */}
+      <input
+        id="input"
+        value={startTime}
+        className="slider-one"
+        type="range"
+        min={0}
+        step={0.01}
+        max={duration}
+        onChange={({ target: { value } }) => {
+          setStartTime(Number(value));
+        }}
+      />
+      {/* SET END */}
+      <input
+        value={!!endTime ? endTime : duration}
+        id="input"
+        className="slider-two"
+        type="range"
+        // TODO
+        // min={startTime + 30}
+        step={0.01}
+        max={duration}
+        onChange={({ target: { value } }) => {
+          setEndTime(Number(value));
+        }}
+      />
+      {/* MAIN SEEKER / TRACKER */}
       <input
         value={tracker}
         id="input"
@@ -74,6 +76,6 @@ export const DoubleSlider: React.FC<IDoubleSliderProps> = ({
           video.current && (video.current.currentTime = Number(value));
         }}
       />
-    </styled.DoubleSlider>
+    </styled.VideoSeeker>
   );
 };

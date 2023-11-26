@@ -1,9 +1,9 @@
 import React from "react";
 import * as styled from "./styled";
 import { PlayPause } from "./PlayPause";
-import { DoubleSlider } from ".";
 import { Col, ConvertFile, Row, TrimVideo } from "..";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
+import { VideoSeeker } from "./VideoSeeker";
 
 export interface IControlBarProps {
   video: React.RefObject<HTMLVideoElement>;
@@ -21,7 +21,7 @@ export const ControlBar: React.FC<IControlBarProps> = ({
   return (
     <styled.ControlBar>
       <Col className="column-container">
-        <DoubleSlider
+        <VideoSeeker
           startTime={startTime}
           endTime={endTime}
           setEndTime={setEndTime}
