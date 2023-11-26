@@ -1,28 +1,50 @@
 import { FFmpeg } from "@ffmpeg/ffmpeg";
-import { fetchFile } from "@ffmpeg/util";
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMusic } from "@fortawesome/free-solid-svg-icons";
+import { Button } from "../inputs";
+import { convertFile } from "./utils";
+import { Select } from "../inputs/Select";
+import { ValidFileTypes } from "../types";
+import * as styled from "./styled";
+import { ProgressBar } from "./ProgressBar";
 
 export interface IConvertFileProps {
   ffmpeg: FFmpeg;
   file: File;
 }
 
-/** TODO: will be any type of file not just MP3  */
+/**
+ * Component to convert a file to a different format
+ * @param ffmpeg ffmpeg instance
+ * @param file file being manipulated
+ * @returns dropwdown to select file type to convert to
+ */
 export const ConvertFile: React.FC<IConvertFileProps> = ({ ffmpeg, file }) => {
-  const toMp3 = async () => {
-    ffmpeg.writeFile(file.name, await fetchFile(file));
-    await ffmpeg.exec(["-i", file.name, `${file.name}.mp3`]);
-    const data = await ffmpeg.readFile(`${file.name}.mp3`);
-    /** automatically download when ready */
-    var download = document.createElement("a");
-    download.href = URL.createObjectURL(new Blob([data]));
-    download.download = `${file.name}.mp3`;
-    download.click();
-    download.remove();
-  };
+  // TODO: select dropdown for file type
+  const [fileType, setFileType] = React.useState<ValidFileTypes>("mp3");
+  const [progress, setProgress] = React.useState(0);
+  const options = ["mp3", "mp4", "mov", "mkv", "wmv", "gif"];
+
+  console.log(progress);
+
+  ffmpeg.on("progress", ({ progress }) => {
+    setProgress(progress);
+  });
+
   return (
-    <FontAwesomeIcon icon={faMusic} onClick={() => toMp3()} />
+    <styled.ConvertFile>
+      <Select
+        options={options}
+        onChange={(e) => {
+          setFileType(e.target.value as ValidFileTypes);
+        }}
+      />
+      <Button
+        variant="action"
+        onClick={() => convertFile(file, ffmpeg, fileType, true)}
+      >
+        {/* go back to default Convert text when bar is done, or when nothing is in progress */}
+        {!progress || progress === 1 ? "Convert" : <ProgressBar value={progress} max="1" />}
+      </Button>
+    </styled.ConvertFile>
   );
 };

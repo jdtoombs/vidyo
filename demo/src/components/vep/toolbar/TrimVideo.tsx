@@ -3,6 +3,7 @@ import { fetchFile } from "@ffmpeg/util";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faScissors } from "@fortawesome/free-solid-svg-icons";
+import { Button } from "../inputs";
 
 export interface ITrimVideoProps {
   ffmpeg: FFmpeg;
@@ -17,7 +18,6 @@ export const TrimVideo: React.FC<ITrimVideoProps> = ({
   startTime,
   endTime,
 }) => {
-  console.log(startTime);
   const toTimeString = (time: number) => {
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor(time / 60);
@@ -28,9 +28,6 @@ export const TrimVideo: React.FC<ITrimVideoProps> = ({
   };
   const trim = async () => {
     ffmpeg.writeFile(file.name, await fetchFile(file));
-    ffmpeg.on("log", ({ message }) => {
-      console.log(message);
-    });
     await ffmpeg.exec([
       "-ss",
       toTimeString(startTime),
@@ -52,5 +49,10 @@ export const TrimVideo: React.FC<ITrimVideoProps> = ({
     download.click();
     download.remove();
   };
-  return <FontAwesomeIcon icon={faScissors} onClick={() => trim()} />;
+  return (
+    <Button variant="action" className="trim" onClick={trim}>
+      Trim
+      <FontAwesomeIcon icon={faScissors} />
+    </Button>
+  );
 };

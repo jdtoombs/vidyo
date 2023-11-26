@@ -9,6 +9,7 @@ export const ControlBar = styled(Row)`
   box-sizing: border-box;
 
   .tools {
+    margin-left: auto;
     svg {
       margin-left: 0.5em;
     }

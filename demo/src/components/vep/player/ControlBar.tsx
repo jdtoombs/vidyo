@@ -30,8 +30,7 @@ export const ControlBar: React.FC<IControlBarProps> = ({
         />
         <Row>
           <PlayPause video={video} />
-          <div className="tools">
-            {file && <ConvertFile ffmpeg={ffmpeg} file={file} />}
+          <Row className="tools">
             {file && (
               <TrimVideo
                 startTime={startTime}
@@ -40,7 +39,8 @@ export const ControlBar: React.FC<IControlBarProps> = ({
                 file={file}
               />
             )}
-          </div>
+            {file && <ConvertFile ffmpeg={ffmpeg} file={file} />}
+          </Row>
         </Row>
       </Col>
     </styled.ControlBar>
