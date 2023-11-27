@@ -5,9 +5,8 @@ export const Uploader = styled(Row)`
   width: 100%;
   /* margin-bottom: 0.25em; */
   border: 0.05em solid;
-  border-color: ${(props) => props.theme.css.black};
-  background-color: ${(props) => props.theme.css.black};
-  border-radius: 0.25em;
+  border-color: ${(props) => props.theme.css.primary};
+  background-color: ${(props) => props.theme.css.primary};
   box-sizing: border-box;
   padding: 0.25em;
 
@@ -21,6 +20,7 @@ export const Uploader = styled(Row)`
   }
 
   .upload-button {
+    margin-top: 0.05em;
     color: ${(props) => props.theme.css.action};
     &:hover {
       cursor: pointer;

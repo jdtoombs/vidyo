@@ -5,7 +5,7 @@ export const ControlBar = styled(Row)`
   width: 100%;
   padding: 0.5em;
   color: ${(props) => props.theme.css.action};
-  background-color: ${(props) => props.theme.css.black};
+  background-color: ${(props) => props.theme.css.primary};
   box-sizing: border-box;
 
   .tools {

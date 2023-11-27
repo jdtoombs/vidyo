@@ -18,6 +18,15 @@ export const ControlBar: React.FC<IControlBarProps> = ({
 }) => {
   const [startTime, setStartTime] = React.useState(0);
   const [endTime, setEndTime] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!file) {
+      setStartTime(0);
+      setEndTime(0);
+    }
+  }, [file]);
+
+  console.log(!!file);
   return (
     <styled.ControlBar>
       <Col className="column-container">

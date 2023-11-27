@@ -26,6 +26,9 @@ export const TrimVideo: React.FC<ITrimVideoProps> = ({
       minutes < 10 ? `0` + minutes : minutes
     }:${seconds < 10 ? `0` + seconds : seconds}`;
   };
+
+  console.log(toTimeString(startTime), toTimeString(endTime));
+
   const trim = async () => {
     ffmpeg.writeFile(file.name, await fetchFile(file));
     await ffmpeg.exec([

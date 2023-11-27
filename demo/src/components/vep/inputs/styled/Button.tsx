@@ -14,7 +14,7 @@ export const Button = styled.button<{ $variant?: "danger" | "action" }>`
       case "action":
         return props.theme.css.action;
       default:
-        return props.theme.css.black;
+        return props.theme.css.primary;
     }
   }};
   border-color: ${(props) => {
@@ -24,13 +24,13 @@ export const Button = styled.button<{ $variant?: "danger" | "action" }>`
       case "action":
         return props.theme.css.action;
       default:
-        return props.theme.css.black;
+        return props.theme.css.primary;
     }
   }};
   background-color: ${(props) => {
     switch (props.$variant) {
       default:
-        return props.theme.css.black;
+        return props.theme.css.primary;
     }
   }};
   border-radius: 0.25em;

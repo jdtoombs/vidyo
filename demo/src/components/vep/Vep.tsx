@@ -5,6 +5,7 @@ import { toBlobURL } from "@ffmpeg/util";
 import * as styled from "./styled";
 import { ThemeProvider } from "styled-components";
 import css from "./css/_variables.module.scss";
+import { Spinner } from "./indicators";
 
 export interface IVepProps {
   /** whether to show ffmpeg logs */
@@ -13,6 +14,7 @@ export interface IVepProps {
 
 /**
  * component to upload, edit, and play a file.
+ * @param ffmpegLogs whether to show ffmpeg logs
  * @returns The main container for the video editor and player
  */
 export const Vep: React.FC<IVepProps> = ({ ffmpegLogs }) => {
@@ -69,12 +71,12 @@ export const Vep: React.FC<IVepProps> = ({ ffmpegLogs }) => {
     <ThemeProvider theme={{ css }}>
       <styled.Vep className="vep-container">
         {ffmpegReady ? (
-          <Col>
+          <Col className="vep-main">
             <Uploader file={file} setSource={setSource} setFile={setFile} />
             <Player ffmpeg={ffmpegRef.current} source={source} file={file} />
           </Col>
         ) : (
-          "Loading Vep..."
+          <Spinner />
         )}
       </styled.Vep>
     </ThemeProvider>

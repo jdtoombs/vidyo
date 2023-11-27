@@ -19,20 +19,33 @@ export const VideoSeeker: React.FC<IDoubleSliderProps> = ({
   const [tracker, setTracker] = React.useState(0);
   const [duration, setDuration] = React.useState(0);
 
-  // TODO: change from any to something more specific
+  React.useEffect(() => {
+    if (!video.current?.currentTime) {
+      setTracker(0);
+    }
+  }, [tracker, startTime, endTime]);
 
-  video.current?.addEventListener("timeupdate", () => {
+  // TODO: fix issue listed below
+  /** currently the below logic wont let the user click forward if it's past the endtime */
+  const resetTracker = () => {
     video.current?.currentTime && setTracker(video.current.currentTime);
-  });
-  // video.current?.addEventListener("timeupdate", () => {
-  //   video.current?.currentTime && setTracker(video.current.currentTime);
-  //   if (
-  //     video.current?.currentTime &&
-  //     Math.floor(video.current?.currentTime) === Math.floor(endTime)
-  //   ) {
-  //     video.current.currentTime = startTime;
-  //   }
-  // });
+    if (
+      video.current?.currentTime &&
+      video.current?.currentTime >= endTime &&
+      !!endTime
+    ) {
+      video.current.currentTime = startTime;
+    }
+  };
+
+  /** want to add and remove event listeners based on the endpoints set by the user, this way most recent endpoints are stored */
+  React.useEffect(() => {
+    video.current?.addEventListener("timeupdate", resetTracker);
+
+    return () => {
+      video.current?.removeEventListener("timeupdate", resetTracker);
+    };
+  }, [endTime, startTime]);
 
   if (video.current)
     video.current.onloadedmetadata = () => {

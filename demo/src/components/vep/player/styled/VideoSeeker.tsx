@@ -41,7 +41,7 @@ export const VideoSeeker = styled(Col)`
     appearance: none;
     width: 0.35em;
     height: 1.5em;
-    background: ${(props) => props.theme.css.teal};
+    background: ${(props) => props.theme.css.action};
     border-radius: 0.5em;
   }
   /** ff thumbs */
@@ -52,7 +52,7 @@ export const VideoSeeker = styled(Col)`
     appearance: none;
     width: 0.35em;
     height: 1.5em;
-    background: ${(props) => props.theme.css.teal};
+    background: ${(props) => props.theme.css.action};
     border-radius: 0.5em;
   }
 
@@ -62,7 +62,7 @@ export const VideoSeeker = styled(Col)`
     cursor: grab;
     -webkit-appearance: none;
     appearance: none;
-    width: 0.25em;
+    width: 0.35em;
     height: 1.5em;
     background: ${(props) => props.theme.css.yellow};
     margin-top: -0.65em;
@@ -82,7 +82,7 @@ export const VideoSeeker = styled(Col)`
   }
 
   input[type="range"]::-webkit-slider-runnable-track {
-    background: ${(props) => props.theme.css.teal};
+    background: ${(props) => props.theme.css.action};
     width: 3em;
     margin-bottom: -0.5em;
     height: 0.25em;
@@ -91,7 +91,7 @@ export const VideoSeeker = styled(Col)`
 
   /** firefox */
   input[type="range"]::-moz-range-track {
-    background: ${(props) => props.theme.css.teal};
+    background: ${(props) => props.theme.css.action};
     width: 3em;
     margin-bottom: -0.5em;
     height: 0.25em;
