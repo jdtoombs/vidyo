@@ -10,14 +10,18 @@ import { Spinner } from "./indicators";
 export interface IVepProps {
   /** whether to show ffmpeg logs */
   ffmpegLogs?: boolean;
+  /** custom theme  */
+  theme?: CSSModuleClasses;
 }
 
 /**
  * component to upload, edit, and play a file.
  * @param ffmpegLogs whether to show ffmpeg logs
+ * @param theme custom theme - primary colour controls player tool bar and header, secondary colour controls the fill, and action colour controls the icons, 
+ *              danger colour controls the clear button, trim to control the outline of header/footers
  * @returns The main container for the video editor and player
  */
-export const Vep: React.FC<IVepProps> = ({ ffmpegLogs }) => {
+export const Vep: React.FC<IVepProps> = ({ ffmpegLogs, theme }) => {
   const [file, setFile] = React.useState<File | null>(null);
   const [source, setSource] = React.useState<string | null>(null);
   const ffmpegRef = React.useRef(new FFmpeg());
@@ -68,7 +72,7 @@ export const Vep: React.FC<IVepProps> = ({ ffmpegLogs }) => {
   }, [file]);
 
   return (
-    <ThemeProvider theme={{ css }}>
+    <ThemeProvider theme={theme ?? { css }}>
       <styled.Vep className="vep-container">
         {ffmpegReady ? (
           <Col className="vep-main">

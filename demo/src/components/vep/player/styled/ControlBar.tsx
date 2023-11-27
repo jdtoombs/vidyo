@@ -7,6 +7,7 @@ export const ControlBar = styled(Row)`
   color: ${(props) => props.theme.css.action};
   background-color: ${(props) => props.theme.css.primary};
   box-sizing: border-box;
+  border-top: 0.05em solid ${(props) => props.theme.css.trim};
 
   .tools {
     margin-left: auto;
