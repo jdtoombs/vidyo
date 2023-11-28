@@ -42,7 +42,7 @@ export const Uploader: React.FC<IUploaderProps> = ({
           <FontAwesomeIcon className="upload-button" icon={faCloudArrowUp} />
         </Row>
       </label>
-      <div className="file-name">{file ? file.name : "No file selected"}</div>
+      <div className="file-name">{file ? file.name : "no file selected"}</div>
       <input
         id="file-upload"
         type="file"

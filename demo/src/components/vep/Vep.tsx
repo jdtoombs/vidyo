@@ -12,16 +12,18 @@ export interface IVepProps {
   ffmpegLogs?: boolean;
   /** custom theme  */
   theme?: CSSModuleClasses;
+  /** size of video player, vep will wrap around this base size */
+  playerSize?: string;
 }
 
 /**
  * component to upload, edit, and play a file.
  * @param ffmpegLogs whether to show ffmpeg logs
- * @param theme custom theme - primary colour controls player tool bar and header, secondary colour controls the fill, and action colour controls the icons, 
+ * @param theme custom theme - primary colour controls player tool bar and header, secondary colour controls the fill, and action colour controls the icons,
  *              danger colour controls the clear button, trim to control the outline of header/footers
  * @returns The main container for the video editor and player
  */
-export const Vep: React.FC<IVepProps> = ({ ffmpegLogs, theme }) => {
+export const Vep: React.FC<IVepProps> = ({ ffmpegLogs, theme, playerSize }) => {
   const [file, setFile] = React.useState<File | null>(null);
   const [source, setSource] = React.useState<string | null>(null);
   const ffmpegRef = React.useRef(new FFmpeg());
@@ -77,7 +79,12 @@ export const Vep: React.FC<IVepProps> = ({ ffmpegLogs, theme }) => {
         {ffmpegReady ? (
           <Col className="vep-main">
             <Uploader file={file} setSource={setSource} setFile={setFile} />
-            <Player ffmpeg={ffmpegRef.current} source={source} file={file} />
+            <Player
+              width={'1280'}
+              ffmpeg={ffmpegRef.current}
+              source={source}
+              file={file}
+            />
           </Col>
         ) : (
           <Spinner />

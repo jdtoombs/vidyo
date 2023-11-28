@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import * as styled from "./styled";
 
 export interface IDoubleSliderProps {
@@ -27,8 +27,8 @@ export const VideoSeeker: React.FC<IDoubleSliderProps> = ({
 
   // TODO: fix issue listed below
   /** currently the below logic wont let the user click forward if it's past the endtime */
-  const resetTracker = () => {
-    video.current?.currentTime && setTracker(video.current.currentTime);
+  const resetTracker = useCallback(() => {
+    !!video.current?.currentTime && setTracker(video.current.currentTime);
     if (
       video.current?.currentTime &&
       video.current?.currentTime >= endTime &&
@@ -36,21 +36,22 @@ export const VideoSeeker: React.FC<IDoubleSliderProps> = ({
     ) {
       video.current.currentTime = startTime;
     }
-  };
+  }, [video.current?.currentTime, endTime, startTime]);
 
   /** want to add and remove event listeners based on the endpoints set by the user, this way most recent endpoints are stored */
   React.useEffect(() => {
     video.current?.addEventListener("timeupdate", resetTracker);
-
     return () => {
       video.current?.removeEventListener("timeupdate", resetTracker);
     };
-  }, [endTime, startTime]);
+  }, [endTime, startTime, tracker, video.current?.currentTime]);
 
-  if (video.current)
-    video.current.onloadedmetadata = () => {
-      setDuration(Number(video.current?.duration));
-    };
+  React.useEffect(() => {
+    if (video.current) {
+      video.current.onloadedmetadata = () =>
+        setDuration(Number(video.current?.duration));
+    }
+  }, [video.current?.duration]);
 
   return (
     <styled.VideoSeeker>

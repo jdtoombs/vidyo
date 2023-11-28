@@ -2,9 +2,10 @@ import React from "react";
 import { ControlBar } from ".";
 import { Col, Row } from "..";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
+import { DropZone } from "../inputs/DropZone";
 
 export interface IPlayerProps {
-  width?: number;
+  width?: string;
   source: string | null;
   file: File | null;
   /** use default html5 controls */
@@ -19,22 +20,26 @@ export interface IPlayerProps {
  */
 export const Player: React.FC<IPlayerProps> = ({
   source,
-  width = 1024,
+  width = 1280,
   file,
   defaultControls = false,
   ffmpeg,
 }) => {
   const videoRef = React.useRef<HTMLVideoElement>(null);
-
   return (
     <Row>
-      <Col>
-        <video
-          ref={videoRef}
-          width={width}
-          src={source ?? ""}
-          controls={defaultControls}
-        />
+      {/* TODO: Kinda jank that it doesn't work without key? */}
+      <Col key={source}>
+        {!!source ? (
+          <video
+            ref={videoRef}
+            width={width}
+            src={source ?? ""}
+            controls={defaultControls}
+          />
+        ) : (
+          <DropZone playerSize={Number(width)} />
+        )}
         <ControlBar ffmpeg={ffmpeg} file={file} video={videoRef} />
       </Col>
     </Row>

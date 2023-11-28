@@ -5,8 +5,22 @@ export interface IButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
   children: React.ReactNode;
   variant?: "danger" | "action";
+  customBorder?: string;
+  customRadius?: string;
 }
 
-export const Button: React.FC<IButtonProps> = ({ variant, ...rest }) => {
-  return <styled.Button $variant={variant} {...rest}></styled.Button>;
+export const Button: React.FC<IButtonProps> = ({
+  variant,
+  customBorder,
+  customRadius,
+  ...rest
+}) => {
+  return (
+    <styled.Button
+      $customBorder={customBorder}
+      $customRadius={customRadius}
+      $variant={variant}
+      {...rest}
+    ></styled.Button>
+  );
 };

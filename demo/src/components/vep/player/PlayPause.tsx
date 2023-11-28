@@ -2,13 +2,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as styled from "./styled";
 import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
+import { Button } from "../inputs";
 
 export interface IPlayPauseProps {
   video: React.RefObject<HTMLVideoElement>;
 }
 
 export const PlayPause: React.FC<IPlayPauseProps> = ({ video }) => {
-  const [playing, setPlaying] = React.useState<boolean>(true);
+  const [playing, setPlaying] = React.useState<boolean>(false);
   React.useEffect(() => {
     if (video.current) {
       if (video.current.paused) {
@@ -18,25 +19,23 @@ export const PlayPause: React.FC<IPlayPauseProps> = ({ video }) => {
       }
     }
   }, [video.current?.paused]);
+
   return (
     <styled.PlayPause>
-      {!playing ? (
-        <FontAwesomeIcon
-          onClick={() => {
+      <Button
+        variant="action"
+        onClick={() => {
+          if (!playing) {
             video.current?.play();
             setPlaying(true);
-          }}
-          icon={faPlay}
-        />
-      ) : (
-        <FontAwesomeIcon
-          onClick={() => {
+          } else {
             video.current?.pause();
             setPlaying(false);
-          }}
-          icon={faPause}
-        />
-      )}
+          }
+        }}
+      >
+        <FontAwesomeIcon icon={!playing ? faPlay : faPause} />
+      </Button>
     </styled.PlayPause>
   );
 };

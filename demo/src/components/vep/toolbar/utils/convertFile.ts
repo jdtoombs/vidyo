@@ -11,11 +11,12 @@ import { downloadFile } from ".";
  * @param downloadAfterConversion whether or not to download the file after conversion
  */
 export const convertFile = async (
-  file: File,
+  file: File | null,
   ffmpeg: FFmpeg,
   convertTo: ValidFileTypes,
   downloadAfterConversion: boolean
 ) => {
+  if(!file) return;
   ffmpeg.writeFile(file.name, await fetchFile(file));
   const outputFile = `${file.name}.${convertTo}`;
   await ffmpeg.exec(["-i", file.name, outputFile]);

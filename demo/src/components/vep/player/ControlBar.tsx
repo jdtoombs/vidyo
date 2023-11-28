@@ -4,6 +4,7 @@ import { PlayPause } from "./PlayPause";
 import { Col, ConvertFile, Row, TrimVideo } from "..";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { VideoSeeker } from "./VideoSeeker";
+import { Button } from "../inputs";
 
 export interface IControlBarProps {
   video: React.RefObject<HTMLVideoElement>;
@@ -26,7 +27,6 @@ export const ControlBar: React.FC<IControlBarProps> = ({
     }
   }, [file]);
 
-  console.log(!!file);
   return (
     <styled.ControlBar>
       <Col className="column-container">
@@ -40,15 +40,13 @@ export const ControlBar: React.FC<IControlBarProps> = ({
         <Row>
           <PlayPause video={video} />
           <Row className="tools">
-            {file && (
-              <TrimVideo
-                startTime={startTime}
-                endTime={endTime}
-                ffmpeg={ffmpeg}
-                file={file}
-              />
-            )}
-            {file && <ConvertFile ffmpeg={ffmpeg} file={file} />}
+            <TrimVideo
+              startTime={startTime}
+              endTime={endTime}
+              ffmpeg={ffmpeg}
+              file={file}
+            />
+            <ConvertFile ffmpeg={ffmpeg} file={file} />
           </Row>
         </Row>
       </Col>

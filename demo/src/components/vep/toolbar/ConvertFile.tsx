@@ -9,7 +9,7 @@ import { ProgressBar } from "./ProgressBar";
 
 export interface IConvertFileProps {
   ffmpeg: FFmpeg;
-  file: File;
+  file: File | null;
 }
 
 /**
@@ -23,8 +23,6 @@ export const ConvertFile: React.FC<IConvertFileProps> = ({ ffmpeg, file }) => {
   const [fileType, setFileType] = React.useState<ValidFileTypes>("mp3");
   const [progress, setProgress] = React.useState(0);
   const options = ["mp3", "mp4", "mov", "mkv", "wmv", "gif"];
-
-  console.log(progress);
 
   ffmpeg.on("progress", ({ progress }) => {
     setProgress(progress);
@@ -41,9 +39,10 @@ export const ConvertFile: React.FC<IConvertFileProps> = ({ ffmpeg, file }) => {
       <Button
         variant="action"
         onClick={() => convertFile(file, ffmpeg, fileType, true)}
+        customRadius="0 0.25em 0.25em 0"
       >
         {/* go back to default Convert text when bar is done, or when nothing is in progress */}
-        {!progress || progress === 1 ? "Convert" : <ProgressBar value={progress} max="1" />}
+        {!progress || progress === 1 ? "convert" : <ProgressBar value={progress} max="1" />}
       </Button>
     </styled.ConvertFile>
   );

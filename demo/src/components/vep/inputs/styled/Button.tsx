@@ -1,11 +1,18 @@
 import styled from "styled-components";
 
-export const Button = styled.button<{ $variant?: "danger" | "action" }>`
+export const Button = styled.button<{
+  $variant?: "danger" | "action";
+  $customBorder?: string;
+  $customRadius?: string;
+}>`
   &:hover {
     cursor: pointer;
     background-color: ${(props) => props.theme.css.grey};
   }
-  border: 0.1em solid;
+  border-radius: ${(props) =>
+    props.$customRadius ? props.$customRadius : "0.25em"};
+  border: ${(props) =>
+    props.$customBorder ? props.$customBorder : "0.1em solid"};
   background-color: ${(props) => props.theme.css.white};
   color: ${(props) => {
     switch (props.$variant) {
@@ -33,5 +40,8 @@ export const Button = styled.button<{ $variant?: "danger" | "action" }>`
         return props.theme.css.primary;
     }
   }};
-  border-radius: 0.25em;
+  svg {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
 `;

@@ -7,7 +7,7 @@ import { Button } from "../inputs";
 
 export interface ITrimVideoProps {
   ffmpeg: FFmpeg;
-  file: File;
+  file: File | null;
   startTime: number;
   endTime: number;
 }
@@ -18,6 +18,7 @@ export const TrimVideo: React.FC<ITrimVideoProps> = ({
   startTime,
   endTime,
 }) => {
+  // TODO: should be accurate to the ms not second
   const toTimeString = (time: number) => {
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor(time / 60);
@@ -27,9 +28,8 @@ export const TrimVideo: React.FC<ITrimVideoProps> = ({
     }:${seconds < 10 ? `0` + seconds : seconds}`;
   };
 
-  console.log(toTimeString(startTime), toTimeString(endTime));
-
   const trim = async () => {
+    if(!file) return;
     ffmpeg.writeFile(file.name, await fetchFile(file));
     await ffmpeg.exec([
       "-ss",
@@ -54,7 +54,7 @@ export const TrimVideo: React.FC<ITrimVideoProps> = ({
   };
   return (
     <Button variant="action" className="trim" onClick={trim}>
-      Trim
+      trim
       <FontAwesomeIcon icon={faScissors} />
     </Button>
   );

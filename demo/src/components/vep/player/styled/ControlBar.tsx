@@ -9,13 +9,6 @@ export const ControlBar = styled(Row)`
   box-sizing: border-box;
   border-top: 0.05em solid ${(props) => props.theme.css.trim};
 
-  .tools {
-    margin-left: auto;
-    svg {
-      margin-left: 0.5em;
-    }
-  }
-
   svg {
     &:hover {
       cursor: pointer;
@@ -23,7 +16,17 @@ export const ControlBar = styled(Row)`
     }
   }
 
+  .tools {
+    margin-left: auto;
+  }
+
   .column-container {
     width: 100%;
+  }
+
+  .trim {
+    svg {
+      margin-left: 0.25em;
+    }
   }
 `;
