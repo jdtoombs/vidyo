@@ -17,6 +17,7 @@ export const DropZone = styled.div<{ $width: number; $height: number }>`
       height: 2.5em;
       width: 2.5em;
       margin-bottom: 1em;
+      filter: drop-shadow(0 0 0.1em ${(props) => props.theme.css.primary});
     }
   }
 `;

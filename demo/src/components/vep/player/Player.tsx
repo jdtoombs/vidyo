@@ -1,6 +1,5 @@
 import React from "react";
-import { ControlBar } from ".";
-import { Col, Row } from "..";
+import { Col, ControlBar, Row } from "..";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { DropZone } from "../inputs/DropZone";
 
@@ -26,6 +25,7 @@ export const Player: React.FC<IPlayerProps> = ({
   ffmpeg,
 }) => {
   const videoRef = React.useRef<HTMLVideoElement>(null);
+
   return (
     <Row>
       {/* TODO: Kinda jank that it doesn't work without key? */}

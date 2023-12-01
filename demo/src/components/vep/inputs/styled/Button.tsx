@@ -5,15 +5,14 @@ export const Button = styled.button<{
   $customBorder?: string;
   $customRadius?: string;
 }>`
-  &:hover {
-    cursor: pointer;
-    background-color: ${(props) => props.theme.css.grey};
-  }
+  min-height: 19px;
+  display: flex;
+  align-items: center;
   border-radius: ${(props) =>
     props.$customRadius ? props.$customRadius : "0.25em"};
   border: ${(props) =>
     props.$customBorder ? props.$customBorder : "0.1em solid"};
-  background-color: ${(props) => props.theme.css.white};
+  background-color: ${(props) => props.theme.css.action};
   color: ${(props) => {
     switch (props.$variant) {
       case "danger":
@@ -43,5 +42,9 @@ export const Button = styled.button<{
   svg {
     margin-top: auto;
     margin-bottom: auto;
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: ${(props) => props.theme.css.grey};
   }
 `;

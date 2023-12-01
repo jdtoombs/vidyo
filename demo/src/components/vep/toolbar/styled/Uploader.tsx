@@ -16,7 +16,7 @@ export const Uploader = styled(Row)`
 
   .file-name {
     margin-left: 0.5em;
-    color: ${(props) => props.theme.css.white};
+    color: ${(props) => props.theme.css.action};
   }
 
   .upload-button {

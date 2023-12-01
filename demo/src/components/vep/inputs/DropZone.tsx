@@ -1,4 +1,4 @@
-import React from "react";
+import React, { DragEventHandler } from "react";
 import * as styled from "./styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHandPointDown } from "@fortawesome/free-solid-svg-icons";
@@ -26,9 +26,24 @@ export const DropZone: React.FC<IDropZoneProps> = ({
   }, [playerSize]);
 
   const dropRef = React.useRef<HTMLDivElement>(null);
-  // TODO
+  // TODO drag and drop
   const handleDragOver = () => {};
-  const handleDrop = () => {};
+  const handleDrop = (e: any) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // TODO: validate file types
+
+    const files = e.dataTransfer.files;
+
+    // Temporarily only allow one file - add dialog box later
+    if (files.length > 1) {
+      alert("Only one file is allowed");
+      return;
+    }
+
+    // handle upload
+  };
 
   React.useEffect(() => {
     if (dropRef.current) {
@@ -53,7 +68,7 @@ export const DropZone: React.FC<IDropZoneProps> = ({
     >
       <Col className="drop-box">
         {!!icon ? icon : <FontAwesomeIcon icon={faHandPointDown} />}
-        <div>{!!message ? message : "Drop or upload file to begin"}</div>
+        <div>{!!message ? message : "drop or upload a file to begin"}</div>
       </Col>
     </styled.DropZone>
   );

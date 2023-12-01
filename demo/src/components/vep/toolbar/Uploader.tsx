@@ -2,7 +2,7 @@ import React from "react";
 import * as styled from "./styled";
 import { Button } from "../inputs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faCloudArrowUp, faUnlink } from "@fortawesome/free-solid-svg-icons";
 import { Row } from "..";
 
 export interface IUploaderProps {
@@ -42,6 +42,7 @@ export const Uploader: React.FC<IUploaderProps> = ({
           <FontAwesomeIcon className="upload-button" icon={faCloudArrowUp} />
         </Row>
       </label>
+      {/* TODO: Change to input and make it renable file name */}
       <div className="file-name">{file ? file.name : "no file selected"}</div>
       <input
         id="file-upload"
@@ -51,7 +52,7 @@ export const Uploader: React.FC<IUploaderProps> = ({
         onChange={handleUploadChange}
       />
       <Button variant="danger" className="clear-button" onClick={handleClear}>
-        x
+        <FontAwesomeIcon icon={faUnlink} />
       </Button>
     </styled.Uploader>
   );
